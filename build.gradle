@@ -102,6 +102,13 @@ repositories {
         name = 'CurseMaven'
         url = uri('https://cursemaven.com')
     }
+    // The Aether jar JarJars accessories, which hard-requires owo; owo ships on
+    // Modrinth only, so its maven is needed alongside CurseMaven - dev
+    // classpath only, never packaged.
+    maven {
+        name = 'ModrinthMaven'
+        url = uri('https://maven.modrinth.com')
+    }
 }
 
 // A dev-runs-only dependency bucket: the runs resolve
@@ -117,6 +124,11 @@ configurations.runtimeClasspath.extendsFrom(configurations.devRuntime)
 
 dependencies {
     devRuntime 'curse.maven:the-aether-255308:7043502'
+    // Transitive closure of the Aether jar: it JarJars accessories (and
+    // cumulus_menus + nitrogen_internals), and accessories hard-requires
+    // owo >= 0.12.15.0+1.21, which is not bundled - FML needs it on the
+    // classpath or the server refuses to boot.
+    devRuntime 'maven.modrinth:owo-lib:0.12.15.6-beta.1+1.21'
     testImplementation platform('org.junit:junit-bom:5.10.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

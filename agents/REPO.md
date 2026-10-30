@@ -18,8 +18,8 @@ with its own salt, and the ported content pack (types, biome mappings, staged lo
 treasure, theming).
 
 **Dependencies**
-- Required: Minecraft, NeoForge, **The Aether** `aether [1.5.10,)` (org ruling: target mod is a hard dependency; CF project 255308, file 7043502 = aether-1.21.1-1.5.10-neoforge, no transitive hard deps).
-- Dev classpath: `curse.maven:the-aether-255308:7043502` through the devRuntime bucket in build.gradle - never packaged, POM-clean.
+- Required: Minecraft, NeoForge, **The Aether** `aether [1.5.10,)` (org ruling: target mod is a hard dependency; CF project 255308, file 7043502 = aether-1.21.1-1.5.10-neoforge). The Aether jar JarJars three mods: accessories, cumulus_menus and nitrogen_internals; accessories in turn hard-requires owo >= 0.12.15.0+1.21, so the effective closure is aether + accessories + owo (+ the two bundled libraries).
+- Dev classpath: `curse.maven:the-aether-255308:7043502` + `maven.modrinth:owo-lib:0.12.15.6-beta.1+1.21` through the devRuntime bucket in build.gradle - never packaged, POM-clean. owo satisfies the JarJar'd accessories floor of 0.12.15.0+1.21; the ModrinthMaven repository is declared alongside CurseMaven for it.
 - Planned for first implementation: `infinite-dungeon-api` (dimension profiles),
   Dungeon Crawl (content contract, CF 324973 file 7887320 / Modrinth q0rRg4lH),
   and the profile-driven core of HexaHexes/infinite-dungeon (issues #162, #163).
