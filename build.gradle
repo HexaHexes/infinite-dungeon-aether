@@ -107,7 +107,7 @@ repositories {
     // classpath only, never packaged.
     maven {
         name = 'ModrinthMaven'
-        url = uri('https://maven.modrinth.com')
+        url = uri('https://api.modrinth.com/maven') // same service; maven.modrinth.com retired (no DNS record)
     }
 }
 
